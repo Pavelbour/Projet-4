@@ -10,26 +10,21 @@
 </head>
 <body>
     <div class="container">
-        <div class="row">
-            <!-- En-tête du site -->
-            <header class="col-lg-12"><h1>Le blog de Jean Forteroche</h1></header>
-        </div>
+        <?php
+            include ("entete.php");
+            //En-tête du site
+        ?>
 
-        <nav class="navbar navbar-inverse">
-            <!-- Le menu principal -->
-            <ul class="nav navbar-nav">
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#">Biographie</a></li>
-                <li><a href="#">Histoires</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
+        <?php
+            include ("menu.php");
+            //Le menu principal
+        ?>
 
         <div class="row">
-            <aside class="col-lg-3 gauche">
-                <!-- La photo/le panneau gauche -->
-                <img src="img/portrait.jpg" alt="Jean Forteroche">
-            </aside>
+            <?php
+                include ("photo.php");
+                //Le panneau gauche
+            ?>
 
             <article class="col-lg-6">
                 <!-- Le contenu principal de la page -->
@@ -39,29 +34,16 @@
                 </div>
             </article>
 
-            <aside class="col-lg-3">
-                <!-- Le menu/ le panneau droit -->
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Les derniers chapitres</h3>
-                    </div>
-                    <ul class="list-group">
-                        <li class="list-group-item"><a href="#">Chapitre 1</a></li>
-                        <li class="list-group-item"><a href="#">Chapitre 2</a></li>
-                        <li class="list-group-item"><a href="#">Chapitre 3</a></li>
-                        <li class="list-group-item"><a href="#">Chapitre 4</a></li>
-                        <li class="list-group-item"><a href="#">Chapitre 5</a></li>
-                    </ul>
-                </div>
-            </aside>
+            <?php
+                include ("chapitres.php");
+                //Le menu droit
+            ?>
         </div>
 
-        <nav class="navbar navbar-inverse navbar-fixed-bottom">
-            <!-- Footer -->
-            <ul class="nav navbar-nav">
-                <li><a href="#">Se connecter</a></li>
-            </ul>
-        </nav>
+        <?php
+            include ("footer.php");
+            //Le footer
+        ?>
     </div>
 </body>
 </html>
