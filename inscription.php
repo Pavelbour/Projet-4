@@ -1,6 +1,9 @@
 <?php
     session_start();
+    $bdd = new PDO('mysql:host=localhost;dbname=jfblog', 'root', '');
+    $requete = $bdd->prepare('INSERT INTO utilisateurs(pseudo, email, mot_de_passe) VALUES(:pseudo, :email, :mot_de_passe)');
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -31,10 +34,18 @@
 
             <article class="col-lg-6">
                 <!-- Le contenu principal de la page -->
-                <h2>Ma biographie</h2>
-                <div>
-                    Ici vous trouvez ma biographie.
-                </div>
+                <?php
+                if($_POST['imot_de_passe'] == $_POST['rmot_de_passe']){
+                    $requete->execute(array(
+                        'pseudo' => $_POST['ipseudo'],
+                        'email' => $_POST['e_mail'],
+                        'mot_de_passe' => $_POST['imot_de_passe']
+                    ));
+                    echo '<p>Maintenant vous êtes inscrit(e). Votre pseudo est ' . $_POST['ipseudo'] .'</p>';
+                }else{
+                    echo '<p>Les donnes ont été saisis incorrectement. Essayez encore une fois.</p>';
+                }
+                ?>
             </article>
 
             <?php

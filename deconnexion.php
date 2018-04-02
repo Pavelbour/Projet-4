@@ -1,6 +1,9 @@
 <?php
     session_start();
+    $_SESSION = array();
+    session_destroy();
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -31,10 +34,7 @@
 
             <article class="col-lg-6">
                 <!-- Le contenu principal de la page -->
-                <h2>Ma biographie</h2>
-                <div>
-                    Ici vous trouvez ma biographie.
-                </div>
+                <p>Vous êtes déconnecté(e)</p>
             </article>
 
             <?php

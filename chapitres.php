@@ -1,7 +1,7 @@
 <?php
 
 $bdd = new PDO('mysql:host=localhost;dbname=jfblog', 'root', '');
-$reponse = $bdd->query('SELECT nom FROM chapitres');
+$reponse = $bdd->query('SELECT id, nom FROM chapitres');
 ?>
 <aside class="col-lg-3">
     <!-- Le menu/ le panneau droit -->
@@ -13,7 +13,7 @@ $reponse = $bdd->query('SELECT nom FROM chapitres');
             <?php
                 while ( $donnes = $reponse->fetch())
                 {
-                    echo '<li class="list-group-item"><a href="chapitre.php?nom=' .$donnes['nom'] . '">' . $donnes['nom'] . '</a></li>';
+                    echo '<li class="list-group-item"><a href="chapitre.php?id=' .$donnes['id'] . '">' . $donnes['nom'] . '</a></li>';
                 }
             ?>
         </ul>

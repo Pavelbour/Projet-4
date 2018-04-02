@@ -1,6 +1,9 @@
 <?php
     session_start();
+    $bdd = new PDO('mysql:host=localhost;dbname=jfblog', 'root', '');
+    $requete = $bdd->prepare('INSERT INTO chapitres(nom, contenu) VALUES(:nom, :contenu)');
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -31,10 +34,17 @@
 
             <article class="col-lg-6">
                 <!-- Le contenu principal de la page -->
-                <h2>Ma biographie</h2>
-                <div>
-                    Ici vous trouvez ma biographie.
-                </div>
+                <?php
+                if($_SESSION['utilisateur_id'] == 2){
+                    $requete->execute(array(
+                        'nom' => $_POST['nomc'],
+                        'contenu' => $_POST['contenu']
+                    ));
+                    echo '<p>Le chapitre a été ajouté</p>';
+                }else{
+                    echo '<p>Vous n\'avez pas le droit d\'ajouter un chapitre !</p>';
+                }
+                ?>
             </article>
 
             <?php

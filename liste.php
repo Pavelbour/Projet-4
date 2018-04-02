@@ -1,7 +1,7 @@
 <?php
-
-$bdd = new PDO('mysql:host=localhost;dbname=jfblog', 'root', '');
-$reponse = $bdd->query('SELECT nom FROM chapitres');
+    session_start();
+    $bdd = new PDO('mysql:host=localhost;dbname=jfblog', 'root', '');
+    $reponse = $bdd->query('SELECT nom, id FROM chapitres');
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +37,7 @@ $reponse = $bdd->query('SELECT nom FROM chapitres');
                 <?php
                     while ( $donnes = $reponse->fetch())
                     {
-                        echo '<p><a href="#">' . $donnes['nom'] . '</a></p>';
+                        echo '<p><a href="chapitre.php?id=' . $donnes['id'] . '">' . $donnes['nom'] . '</a></p>';
                     }
                 ?>
             </article>
