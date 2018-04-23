@@ -1,26 +1,38 @@
 <?php
 
     require_once 'controlleurs/controlleurAccueil.php';
+    require_once 'controlleurs/controlleurBio.php';
+    require_once 'controlleurs/controlleurHistoires.php';
+    require_once 'controlleurs/controlleurContact.php';
     require_once 'controlleurs/controlleurChapitre.php';
     require_once 'controlleurs/controlleurUtilisateur.php';
     require_once 'controlleurs/controlleurCommentaire.php';
     require_once 'controlleurs/controlleurAuteur.php';
+    require_once 'controlleurs/controlleurErreur.php';
     require_once 'vues/vue.php';
 
-    class routeur{
+    class Routeur{
         
         private $ctrlAccuil;
+        private $ctrlBio;
+        private $ctrlHistoires;
+        private $ctrlContact;
         private $ctrlChapitre;
         private $ctrlUtilisateur;
         private $ctrlCommentaire;
         private $ctrlAuteur;
+        private $ctrlErreur;
 
         public function __construct(){
-            $this->ctrlAccueil = new controlleurAccueil();
-            $this->ctrlChapitre = new controlleurChapitre();
-            $this->ctrlUtilisateur = new controlleurUtilisateur();
-            $this->ctrlCommentaire = new controlleurCommentaire();
-            $this->ctrlAuteur = new controlleurAuteur();
+            $this->ctrlAccueil = new ControlleurAccueil();
+            $this->ctrlBio = new ControlleurBio();
+            $this->ctrlHistoires = new ControlleurHistoires();
+            $this->ctrlContact = new ControlleurContact();
+            $this->ctrlChapitre = new ControlleurChapitre();
+            $this->ctrlUtilisateur = new ControlleurUtilisateur();
+            $this->ctrlCommentaire = new ControlleurCommentaire();
+            $this->ctrlAuteur = new ControlleurAuteur();
+            $this->ctrlErreur = new ControlleurErreur();
         }
 
         public function routeurRequete (){
@@ -39,14 +51,26 @@
                                 throw new Exception("id n'est pas défini");
                             }
                         break;
+
+                        case 'bio':
+                            $this->ctrlBio->bio();
+                        break;
+
+                        case 'histoires':
+                            $this->ctrlHistoires->histoires();
+                        break;
+
+                        case 'contact':
+                            $this->ctrlContact->contact();
+                        break;
         
                         case 'inscription':
-                            $this->ctrlUtilisateur->inscription ($_POST['ipseudo'], $_POST['e_mail'], $_POST['imot_de_passe'], $_POST['rmot_de_passe']);
+                            $this->ctrlUtilisateur->inscription (htmlspecialchars($_POST['ipseudo']), htmlspecialchars($_POST['e_mail']), htmlspecialchars($_POST['imot_de_passe']), htmlspecialchars($_POST['rmot_de_passe']));
                             $this->ctrlAccueil->accueil();
                         break;
         
                         case 'connexion':
-                            $this->ctrlUtilisateur->connexion ($_POST['pseudo'], $_POST['mot_de_passe']);
+                            $this->ctrlUtilisateur->connexion (htmlspecialchars($_POST['pseudo']), htmlspecialchars($_POST['mot_de_passe']));
                             $this->ctrlAccueil->accueil();
                         break;
         
@@ -55,11 +79,11 @@
                             $this->ctrlAccueil->accueil();
                         break;
 
-                        case 'ajouter_commentaire':
+                        case 'ajouter-commentaire':
                         if(isset($_GET['id'])){
                             $id = intval($_GET['id']);
                             if($id != 0){
-                                $this->ctrlCommentaire->ecrire_commentaire($_SESSION['id'], $id, $_POST['commentaire']);
+                                $this->ctrlCommentaire->ecrire_commentaire($_SESSION['id'], $id, htmlspecialchars($_POST['commentaire']));
                                 $this->ctrlChapitre->afficherChapitre($id);
                             }else{
                                 throw new Exception("Identifiant de billet non valide");
@@ -73,44 +97,44 @@
                             $this->ctrlAuteur->afficherEspaceAuteur();
                         break;
 
-                        case 'ajouter_chapitre':
+                        case 'ajouter-chapitre':
                             if((isset($_POST['titre'])) && (isset($_POST['contenu_chapitre']))){
-                                $this->ctrlChapitre->ajouterChapitre($_POST['titre'], $_POST['contenu_chapitre']);
-                                $this->ctrlAuteur->afficherEspaceAuteur();
+                                $id = $this->ctrlChapitre->ajouterChapitre(htmlspecialchars($_POST['titre']), $_POST['contenu_chapitre']);
+                                $this->ctrlChapitre->afficherChapitre($id);
                             }else{
                                 throw new Exception("Les paramètres sont invalides");
                             }
                         break;
 
-                        case 'modifier_chapitre':
+                        case 'modifier-chapitre':
                             if(isset($_GET['id'])){
-                                $this->ctrlAuteur->modifierChapitre($_GET['id']);
+                                $this->ctrlAuteur->modifierChapitre(htmlspecialchars($_GET['id']));
                             }else{
                                 throw new Exeption("id n'est pas défini");
                             }
-                        break;
+                            break;
 
-                        case 'enregistrer_modification':
+                        case 'enregistrer-modification':
                             if((isset($_POST['titre'])) && (isset($_POST['contenu_chapitre']))){
-                                $this->ctrlChapitre->enregistrerModification($_GET['id'], $_POST['titre'], $_POST['contenu_chapitre']);
-                                $this->ctrlAuteur->afficherEspaceAuteur();
+                                $this->ctrlChapitre->enregistrerModification(htmlspecialchars($_GET['id']), htmlspecialchars($_POST['titre']), $_POST['contenu_chapitre']);
+                                $this->ctrlChapitre->afficherChapitre(htmlspecialchars($_GET['id']));
                             }else{
                                 throw new Exception("Les paramètres sont invalides");
                             }
-                        break;
+                            break;
 
-                        case 'effacer_chapitre':
-                        if(isset($_GET['id'])){
-                            $this->ctrlChapitre->effacerChapitre($_GET['id']);
-                            $this->ctrlAuteur->afficherEspaceAuteur();
-                        }else{
-                            throw new Exeption("id n'est pas défini");
-                        }
-                        break;
+                        case 'effacer-chapitre':
+                            if(isset($_GET['id'])){
+                                $this->ctrlChapitre->effacerChapitre(htmlspecialchars($_GET['id']));
+                                $this->ctrlAuteur->afficherEspaceAuteur();
+                            }else{
+                                throw new Exeption("id n'est pas défini");
+                            }
+                            break;
 
                         case 'signaler':
                         if(isset($_GET['id'])){
-                            $this->ctrlCommentaire->signalerCommentaire($_GET['id']);
+                            $this->ctrlCommentaire->signalerCommentaire(htmlspecialchars($_GET['id']));
                             $this->ctrlAccueil->accueil();
                         }else{
                             throw new Exeption("id n'est pas défini");
@@ -119,7 +143,7 @@
 
                         case 'approuver':
                         if(isset($_GET['id'])){
-                            $this->ctrlCommentaire->approuverCommentaire($_GET['id']);
+                            $this->ctrlCommentaire->approuverCommentaire(htmlspecialchars($_GET['id']));
                             $this->ctrlAuteur->afficherEspaceAuteur();
                         }else{
                             throw new Exeption("id n'est pas défini");
@@ -128,24 +152,24 @@
 
                         case 'effacer':
                         if(isset($_GET['id'])){
-                            $this->ctrlCommentaire->effacerCommentaire($_GET['id']);
+                            $this->ctrlCommentaire->effacerCommentaire(htmlspecialchars($_GET['id']));
                             $this->ctrlAuteur->afficherEspaceAuteur();
                         }else{
                             throw new Exeption("id n'est pas défini");
                         }
                         break;
 
-                        case 'modifier_commentaire':
+                        case 'modifier-commentaire':
                         if(isset($_GET['id'])){
-                            $this->ctrlAuteur->modifierCommentaire($_GET['id']);
+                            $this->ctrlAuteur->modifierCommentaire(htmlspecialchars($_GET['id']));
                         }else{
                             throw new Exeption("id n'est pas défini");
                         }        
                         break;
 
-                        case 'enregistrer_commentaire':
+                        case 'enregistrer-commentaire':
                         if(isset($_GET['id'])){
-                            $this->ctrlCommentaire->modifierCommentaire($_GET['id'], $_POST['contenu_chapitre']);
+                            $this->ctrlCommentaire->modifierCommentaire(htmlspecialchars($_GET['id']), $_POST['contenu_chapitre']);
                             $this->ctrlAuteur->afficherEspaceAuteur();
                         }else{
                             throw new Exeption("id n'est pas défini");
@@ -162,12 +186,7 @@
             }
 
             catch (Exception $e) {
-                $this->erreur($e->getMessage());
+                $this->ctrlErreur->erreur($e->getMessage());
             }
-        }
-
-        private function erreur($msgErreur){
-            $vue = new vue('erreur');
-            $vue->generer(array('msgErreur' => $msgErreur));
         }
     }

@@ -2,7 +2,7 @@
 
     require_once 'modeles/modele.php';
 
-    class chapitre extends modele{
+    class Chapitre extends Modele{
 
         public function recupererChapitres(){
             return $this->executer('SELECT id, nom FROM chapitres');
@@ -14,6 +14,9 @@
 
         public function ajouterChapitre($titre, $contenu){
             $this->executer('INSERT INTO chapitres(nom, contenu) VALUES (:nom, :contenu)', array('nom' => $titre, 'contenu' => $contenu));
+            $id = $this->executer('SELECT id FROM chapitres WHERE nom = ?', array($titre));
+            $resultat = $id->fetch();
+            return $resultat['id'];
         }
 
         public function modifierChapitre($id, $titre, $contenu){

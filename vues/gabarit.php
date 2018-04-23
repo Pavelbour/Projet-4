@@ -19,13 +19,13 @@
             <!-- Le menu principal -->
             <ul class="nav navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="index.php">Accueil</a></li>
-                <li class="nav-item"><a class="nav-link" href="bio.php">Biographie</a></li>
-                <li class="nav-item"><a class="nav-link" href="liste.php">Histoires</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.php?action=bio">Biographie</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.php?action=histoires">Histoires</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.php?action=contact">Contact</a></li>
             </ul>
         </nav>
 
-        <div class="row">
+        <div class="row mt-3">
             <aside class="col-lg-3 gauche">
                 <!-- La photo/le panneau gauche -->
                 <img src="public/img/portrait.jpg" alt="Jean Forteroche">

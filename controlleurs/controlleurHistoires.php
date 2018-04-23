@@ -3,7 +3,7 @@
     require_once 'modeles/chapitre.php';
     require_once 'vues/vue.php';
 
-    class ControlleurAccueil {
+    class ControlleurHistoires {
 
         private $chapitres;
 
@@ -11,9 +11,9 @@
             $this->chapitres = new Chapitre();
         }
 
-        public function accueil(){
+        public function histoires(){
             $chapitres = $this->chapitres->recupererChapitres();
-            $vue = new vue('accueil');
+            $vue = new vue('histoires');
             $vue->generer(array('chapitres' => $chapitres));
         }
 

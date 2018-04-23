@@ -1,6 +1,6 @@
 <?php
 
-    abstract class modele{
+    abstract class Modele{
 
         private $bdd;
 

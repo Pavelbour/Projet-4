@@ -4,14 +4,14 @@
     require_once 'modeles/commentaire.php';
     require_once 'vues/vue.php';
 
-    class controlleurChapitre {
+    class ControlleurChapitre {
 
         private $chapitre;
         private $commentaire;
 
         public function __construct(){
-            $this->chapitre = new chapitre();
-            $this->commentaires = new commentaire();
+            $this->chapitre = new Chapitre();
+            $this->commentaires = new Commentaire();
         }
 
         public function afficherChapitre($id){
@@ -19,11 +19,11 @@
             $chapitre = $this->chapitre->recupererChapitre($id);
             $commentaires = $this->commentaires->recupererCommentaires($id);
             $vue = new vue('chapitre');
-            $vue->generer(array('chapitres' => $chapitres, 'chapitre' => $chapitre, 'commentaires' => $commentaires));
+            $vue->generer(array('chapitres' => $chapitres, 'chapitre' => $chapitre, 'commentaires' => $commentaires, 'idChapitre' => $id));
         }
 
         public function ajouterChapitre($titre, $contenu){
-            $this->chapitre->ajouterChapitre($titre, $contenu);
+            return $this->chapitre->ajouterChapitre($titre, $contenu);
         }
 
         public function enregistrerModification($id, $titre, $contenu){

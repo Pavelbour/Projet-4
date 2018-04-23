@@ -2,12 +2,12 @@
 
     require_once 'modeles/commentaire.php';
 
-    class controlleurCommentaire{
+    class ControlleurCommentaire{
 
         private $commentaires;
 
         public function __construct(){
-            $this->commentaires = new commentaire();
+            $this->commentaires = new Commentaire();
         }
 
         public function obtenir_commentaires($id){

@@ -2,7 +2,7 @@
 
     require_once 'modeles/modele.php';
 
-    class utilisateur extends modele{
+    class Utilisateur extends Modele{
 
         public function ajouterUtilisateur($pseudo, $email, $mot_de_passe){
             $this->executer('INSERT INTO utilisateurs(pseudo, email, mot_de_passe) VALUES(:pseudo, :email, :mot_de_passe)', array('pseudo' => $pseudo, 'email' => $email, 'mot_de_passe' => $mot_de_passe));

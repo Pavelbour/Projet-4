@@ -2,12 +2,12 @@
 
     require_once 'modeles/utilisateur.php';
 
-    class controlleurUtilisateur{
+    class ControlleurUtilisateur{
 
         private $utilisateur;
 
         public function __construct(){
-            $this->utilisateur = new utilisateur();
+            $this->utilisateur = new Utilisateur();
         }
 
         public function connexion($pseudo, $mot_de_passe){

@@ -4,14 +4,14 @@
     require_once 'modeles/commentaire.php';
     require_once 'vues/vue.php';
 
-    class controlleurAuteur{
+    class ControlleurAuteur{
 
         private $chapitres;
         private $commentaires;
 
         public function __construct(){
-            $this->chapitres = new chapitre();
-            $this->commentaires = new commentaire();
+            $this->chapitres = new Chapitre();
+            $this->commentaires = new Commentaire();
         }
 
         public function afficherEspaceAuteur(){
