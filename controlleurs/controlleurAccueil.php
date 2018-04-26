@@ -12,7 +12,7 @@
         }
 
         public function accueil(){
-            $chapitres = $this->chapitres->recupererChapitres();
+            $chapitres = $this->chapitres->recupererDerniersChapitres();
             $vue = new vue('accueil');
             $vue->generer(array('chapitres' => $chapitres));
         }

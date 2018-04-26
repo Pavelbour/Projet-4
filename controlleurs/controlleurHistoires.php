@@ -12,9 +12,10 @@
         }
 
         public function histoires(){
-            $chapitres = $this->chapitres->recupererChapitres();
+            $chapitres = $this->chapitres->recupererDerniersChapitres();
+            $liste = $this->chapitres->recupererChapitres();
             $vue = new vue('histoires');
-            $vue->generer(array('chapitres' => $chapitres));
+            $vue->generer(array('chapitres' => $chapitres, 'liste' => $liste));
         }
 
     }

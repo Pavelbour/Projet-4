@@ -12,7 +12,7 @@
         }
 
         public function contact(){
-            $chapitres = $this->chapitres->recupererChapitres();
+            $chapitres = $this->chapitres->recupererDerniersChapitres();
             $vue = new vue('contact');
             $vue->generer(array('chapitres' => $chapitres));
         }

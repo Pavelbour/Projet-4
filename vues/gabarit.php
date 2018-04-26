@@ -26,7 +26,7 @@
         </nav>
 
         <div class="row mt-3">
-            <aside class="col-lg-3 gauche">
+            <aside class="col-lg-3 gauche d-none d-lg-block">
                 <!-- La photo/le panneau gauche -->
                 <img src="public/img/portrait.jpg" alt="Jean Forteroche">
             </aside>
@@ -36,7 +36,7 @@
                 <?= $contenu ?>
             </article>
 
-            <aside class="col-lg-3">
+            <aside class="col-lg-3 d-none d-lg-block">
                 <!-- Le menu/ le panneau droit -->
                 <div class="card">
                         <div class="card-header bg-primary">Les derniers chapitres</div>

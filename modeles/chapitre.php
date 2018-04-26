@@ -12,6 +12,10 @@
             return $this->executer('SELECT id, nom, contenu FROM chapitres WHERE id = ?', array($id));
         }
 
+        public function recupererDerniersChapitres(){
+            return $this->executer('SELECT id, nom FROM chapitres ORDER BY ajoute DESC LIMIT 5');
+        }
+
         public function ajouterChapitre($titre, $contenu){
             $this->executer('INSERT INTO chapitres(nom, contenu) VALUES (:nom, :contenu)', array('nom' => $titre, 'contenu' => $contenu));
             $id = $this->executer('SELECT id FROM chapitres WHERE nom = ?', array($titre));

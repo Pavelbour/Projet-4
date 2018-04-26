@@ -18,7 +18,7 @@
         <!-- L'onglette Modifier chapitre -->
         <ul class="list-group list-group-flush">
             <?php
-                while ( $donnes = $chapitres->fetch())
+                while ( $donnes = $liste->fetch())
                 {
                     echo '<li class="list-group-item">
                         <h5>' .$donnes['nom'] . '</h5>
@@ -38,7 +38,7 @@
             while ( $donnes = $commentaires->fetch()){
                 echo '<li class="list-group-item">';
                 echo '<h5>' .$donnes['pseudo'] . '</h5>';
-                echo '<p>' .$donnes['contenu'] . '</p>';
+                echo '<p>' .htmlspecialchars_decode($donnes['contenu']) . '</p>';
                 echo '<p>' .$donnes['ajoute'] . '</p>';
                 echo '<a href="index.php?action=modifier-commentaire&amp;id=' .$donnes['id'] . '">Modifier</a>';
                 echo '<a href="index.php?action=approuver&amp;id=' .$donnes['id'] . '">Approuver</a>';
@@ -54,7 +54,7 @@
             while ( $donnes = $commentairesPasSignales->fetch()){
                 echo '<li class="list-group-item">';
                 echo '<h5>' .$donnes['pseudo'] . '</h5>';
-                echo '<p>' .$donnes['contenu'] . '</p>';
+                echo '<p>' .htmlspecialchars_decode($donnes['contenu']) . '</p>';
                 echo '<p>' .$donnes['ajoute'] . '</p>';
                 echo '<a href="index.php?action=modifier-commentaire&amp;id=' .$donnes['id'] . '">Modifier</a>';
                 echo '<a href="index.php?action=effacer&amp;id=' .$donnes['id'] . '">Effacer</a>';

@@ -14,8 +14,18 @@
             $this->commentaires = new Commentaire();
         }
 
+        public function idValid($id){
+            $chapitre = $this->chapitre->recupererChapitre($id);
+            $resultat = $chapitre->fetch();
+            if($resultat == null){
+                return false;
+            }else{
+                return true;
+            }
+        }
+
         public function afficherChapitre($id){
-            $chapitres = $this->chapitre->recupererChapitres();
+            $chapitres = $this->chapitre->recupererDerniersChapitres();
             $chapitre = $this->chapitre->recupererChapitre($id);
             $commentaires = $this->commentaires->recupererCommentaires($id);
             $vue = new vue('chapitre');

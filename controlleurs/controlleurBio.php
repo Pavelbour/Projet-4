@@ -12,7 +12,7 @@
         }
 
         public function bio(){
-            $chapitres = $this->chapitres->recupererChapitres();
+            $chapitres = $this->chapitres->recupererDerniersChapitres();
             $vue = new vue('bio');
             $vue->generer(array('chapitres' => $chapitres));
         }

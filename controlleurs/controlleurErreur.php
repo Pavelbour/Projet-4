@@ -13,7 +13,7 @@
 
         public function erreur($msgErreur){
             $vue = new vue('erreur');
-            $vue->generer(array('msgErreur' => $msgErreur, 'chapitres' => $this->chapitres->recupererChapitres()));
+            $vue->generer(array('msgErreur' => $msgErreur, 'chapitres' => $this->chapitres->recupererDerniersChapitres()));
         }
 
     }

@@ -15,15 +15,16 @@
         }
 
         public function afficherEspaceAuteur(){
-            $chapitres = $this->chapitres->recupererChapitres();
+            $chapitres = $this->chapitres->recupererDerniersChapitres();
+            $liste = $this->chapitres->recupererChapitres();
             $commentaires = $this->commentaires->recupererCommentairesSignales();
             $commentairesPasSignales = $this->commentaires->recupererCommentairesPasSignales();
             $vue = new vue('auteur');
-            $vue->generer(array('chapitres' => $chapitres, 'commentaires' => $commentaires, 'commentairesPasSignales' => $commentairesPasSignales));
+            $vue->generer(array('chapitres' => $chapitres, 'liste' => $liste, 'commentaires' => $commentaires, 'commentairesPasSignales' => $commentairesPasSignales));
         }
 
         public function modifierChapitre($id){
-            $chapitres = $this->chapitres->recupererChapitres();
+            $chapitres = $this->chapitres->recupererDerniersChapitres();
             $chapitre = $this->chapitres->recupererChapitre($id);
             $vue = new vue('modifierchapitre');
             $vue->generer(array('chapitres' => $chapitres, 'chapitre' => $chapitre));
@@ -31,7 +32,7 @@
 
         public function modifierCommentaire($id){
             $commentaire = $this->commentaires->recupererCommentaire($id);
-            $chapitres = $this->chapitres->recupererChapitres();
+            $chapitres = $this->chapitres->recupererDerniersChapitres();
             $vue = new vue('modifiercommentaire');
             $vue->generer(array('commentaire' => $commentaire, 'chapitres' => $chapitres));
         }
