@@ -96,8 +96,12 @@
                                 break;
 
                         case 'author':
-                            // Affiche l'espace auteur
-                            $this->ctrlAuthor->displayAuthorSpace();
+                            // Display the auteur area
+                            if (isset($_SESSION['id']) && $_SESSION['id'] == 1) {
+                                $this->ctrlAuthor->displayAuthorSpace();
+                            } else {
+                                throw new \Exception("Vous n'avez pas le droit à acceder à cette page");
+                            }
                             break;
 
                         case 'add-chapter':
